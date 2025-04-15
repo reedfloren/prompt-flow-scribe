@@ -380,6 +380,8 @@ async function runPrompt(prompt) {
   
   // Set the prompt text
   textarea.value = prompt.text;
+  
+  // Need to trigger input event for ChatGPT to recognize the text
   textarea.dispatchEvent(new Event('input', { bubbles: true }));
   
   // Find the send button
@@ -395,6 +397,11 @@ async function runPrompt(prompt) {
     throw new Error('Send button not found');
   }
   
+  // Make sure send button is enabled
+  if (sendButton.disabled) {
+    throw new Error('Send button is disabled. Cannot send prompt.');
+  }
+  
   // Click the send button
   sendButton.click();
   
@@ -405,18 +412,26 @@ async function runPrompt(prompt) {
 // Wait for ChatGPT to finish responding
 async function waitForResponse() {
   return new Promise((resolve) => {
+    const checkInterval = 500; // Check every 500ms
+    const maxWaitTime = 120000; // Maximum wait time of 2 minutes
+    let elapsedTime = 0;
+    
     // Function to check if ChatGPT is still generating a response
     const checkResponseStatus = () => {
       // Look for elements that indicate response generation is in progress
       const isGenerating = Boolean(
         document.querySelector('button[aria-label="Stop generating"]') ||
-        document.querySelector('.text-2xl.animate-spin')
+        document.querySelector('.text-2xl.animate-spin') ||
+        document.querySelector('[data-state="generating"]') ||
+        document.querySelector('.result-streaming')
       );
       
-      if (isGenerating) {
-        // Still generating, check again in 500ms
-        setTimeout(checkResponseStatus, 500);
+      if (isGenerating && elapsedTime < maxWaitTime) {
+        // Still generating, check again after interval
+        elapsedTime += checkInterval;
+        setTimeout(checkResponseStatus, checkInterval);
       } else {
+        // Either finished generating or timed out
         // Wait a bit more to ensure everything is loaded
         setTimeout(resolve, 1000);
       }
@@ -453,6 +468,11 @@ async function runPromptChain(prompts) {
     
     if (promptElement) {
       promptElement.classList.remove('prompt-running');
+    }
+    
+    // Add a short delay between prompts to ensure UI updates and proper flow
+    if (i < prompts.length - 1) {
+      await new Promise(resolve => setTimeout(resolve, 500));
     }
   }
 }

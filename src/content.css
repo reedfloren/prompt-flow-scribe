@@ -62,6 +62,19 @@
   cursor: grabbing;
 }
 
+/* Textarea with better text visibility */
+.prompt-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  resize: vertical;
+  color: #333333; /* Dark text color for better visibility */
+  background-color: #ffffff; /* Explicit background color */
+  font-size: 14px;
+}
+
 /* Overlay for drag and drop */
 .prompt-dragging {
   opacity: 0.7;
