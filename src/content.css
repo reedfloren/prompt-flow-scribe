@@ -1,0 +1,85 @@
+
+/* Sidebar container */
+#promptflow-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 380px;
+  height: 100vh;
+  background-color: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#promptflow-sidebar.visible {
+  right: 0;
+}
+
+/* Toggle button */
+#promptflow-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 10001;
+  background-color: #10a37f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#promptflow-toggle:hover {
+  background-color: #0d8a6c;
+}
+
+#promptflow-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Prompt chain item */
+.prompt-item {
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  background-color: white;
+  cursor: grab;
+}
+
+.prompt-item:active {
+  cursor: grabbing;
+}
+
+/* Overlay for drag and drop */
+.prompt-dragging {
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+.prompt-item-placeholder {
+  border: 2px dashed #d1d5db;
+  background-color: #f9fafb;
+}
+
+/* Animation for running prompt */
+.prompt-running {
+  border-color: #10a37f;
+  box-shadow: 0 0 0 2px rgba(16, 163, 127, 0.3);
+}
+
+/* Override ChatGPT's styles where needed */
+.chatgpt-app {
+  position: relative;
+}

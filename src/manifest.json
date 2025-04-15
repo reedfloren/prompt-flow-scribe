@@ -1,0 +1,41 @@
+
+{
+  "manifest_version": 3,
+  "name": "PromptFlow - ChatGPT Prompt Chaining",
+  "version": "1.0.0",
+  "description": "Create and run sequential prompt chains in ChatGPT",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["sidebar.html", "sidebar.js", "assets/*"],
+      "matches": ["https://chatgpt.com/*"]
+    }
+  ]
+}

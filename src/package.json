@@ -1,0 +1,19 @@
+
+{
+  "name": "promptflow-chrome-extension",
+  "version": "1.0.0",
+  "description": "ChatGPT Prompt Chaining Chrome Extension",
+  "main": "background.js",
+  "scripts": {
+    "build": "mkdir -p dist && cp -r src/* dist/"
+  },
+  "keywords": [
+    "chrome-extension",
+    "chatgpt",
+    "prompt-chaining",
+    "ai",
+    "productivity"
+  ],
+  "author": "PromptFlow",
+  "license": "MIT"
+}

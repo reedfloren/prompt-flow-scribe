@@ -1,73 +1,45 @@
-# Welcome to your Lovable project
 
-## Project info
+# PromptFlow - ChatGPT Prompt Chaining Extension
 
-**URL**: https://lovable.dev/projects/b9ec81f6-7cc4-461c-a9e4-3564cf5033b4
+A Chrome extension that adds prompt chaining functionality to ChatGPT.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- Create sequential prompt chains for ChatGPT
+- Save and load chains from Chrome local storage
+- Drag and drop interface for reordering prompts
+- Run entire chains with a single click
+- Clean sidebar UI that integrates with ChatGPT's interface
 
-**Use Lovable**
+## Installation Instructions
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b9ec81f6-7cc4-461c-a9e4-3564cf5033b4) and start prompting.
+### Loading the extension for testing:
 
-Changes made via Lovable will be committed automatically to this repo.
+1. Download and unzip the extension files
+2. Open Chrome and navigate to `chrome://extensions/`
+3. Enable "Developer mode" using the toggle in the top-right corner
+4. Click "Load unpacked" and select the `src` folder from the unzipped files
+5. The extension should now be installed and ready to use
 
-**Use your preferred IDE**
+## Usage
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. Go to [ChatGPT](https://chatgpt.com/)
+2. Click on the "Create Chain" button that appears in the top-right corner
+3. In the sidebar that appears:
+   - Name your chain
+   - Add prompts using the "Add Prompt" button
+   - Reorder prompts using the up/down arrows or drag and drop
+   - Save your chain with the "Save" button
+   - Run the chain with the "Run Chain" button
+4. The chain will execute each prompt in sequence and show the final result
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Building from Source
 
-Follow these steps:
+1. Clone the repository
+2. Run `npm install` to install dependencies
+3. Run `npm run build` to build the extension
+4. Load the unpacked extension from the `dist` folder
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## License
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/b9ec81f6-7cc4-461c-a9e4-3564cf5033b4) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+MIT
