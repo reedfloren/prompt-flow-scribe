@@ -213,11 +213,42 @@ function initSidebar() {
     runChainBtn.textContent = 'Running Chain...';
     
     try {
-      await runPromptChain(currentChain.prompts);
+      // Close sidebar before running prompts
+      const sidebar = document.getElementById('promptflow-sidebar');
+      if (sidebar && sidebar.classList.contains('visible')) {
+        sidebar.classList.remove('visible');
+        
+        // Update toggle button text
+        const toggleButton = document.getElementById('promptflow-toggle');
+        if (toggleButton) {
+          toggleButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+              <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
+            </svg>
+            Create Chain
+          `;
+        }
+      }
+      
+      // Give the sidebar time to close before running prompts
+      setTimeout(async () => {
+        try {
+          await runPromptChain(currentChain.prompts);
+        } catch (error) {
+          console.error('Error running prompt chain:', error);
+          alert('Error running prompt chain: ' + error.message);
+        } finally {
+          // Re-enable run button
+          runChainBtn.disabled = false;
+          runChainBtn.textContent = 'Run Chain';
+        }
+      }, 300);
+      
     } catch (error) {
       console.error('Error running prompt chain:', error);
       alert('Error running prompt chain: ' + error.message);
-    } finally {
+      
       // Re-enable run button
       runChainBtn.disabled = false;
       runChainBtn.textContent = 'Run Chain';
@@ -455,6 +486,8 @@ async function runPromptChain(prompts) {
     newChatButton.click();
     // Wait for the new chat to load
     await new Promise(resolve => setTimeout(resolve, 1000));
+  } else {
+    console.log('New chat button not found, continuing with current chat');
   }
   
   // Run each prompt in sequence
@@ -472,7 +505,7 @@ async function runPromptChain(prompts) {
     
     // Add a short delay between prompts to ensure UI updates and proper flow
     if (i < prompts.length - 1) {
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 1000));
     }
   }
 }
